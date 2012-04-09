@@ -1,0 +1,101 @@
+" Variables for template interpolation
+let email_address = "gsutcliffe@ibahn.com"
+let fullname = "Greg Sutcliffe"
+let company_name = "iBahn"
+let template_date_format_string = "%a %b %d %Y"
+
+" pathogen is a plugin for managing plugins as bundles
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+filetype on
+filetype indent on
+filetype plugin on
+
+" set options here
+set ai           " auto indend
+set si           " smart indent
+set ff=unix      " file format unix dammit
+set nocompatible " nocompatible mode
+set ruler        " ruler the bottom
+set background=dark
+
+set expandtab     " expand tabs to spaces
+set tabstop=2     " define what our tabs are
+set softtabstop=2 " soft tabstop
+set shiftwidth=2  " # of spaces for auto indent
+set smarttab      " smart tab (shiftwidth v tabstop)
+set tw=0          " no textwidth set by default
+set modeline      " enable modelines
+set modelines=1   " number of modelines to read
+set tildeop       " case change with movement rather than single char
+
+set showmatch       " show matching brackets
+set matchtime=5     " how many tenths of a second to blink matching brackets for
+
+set hlsearch      " highlight search on by default
+set noincsearch   " move curser as you type search terms
+set autoread      " auto read in files that have changed underneath
+set shellcmdflag=-lc  " set the ! shell to be a login shell to get at functions and aliases
+
+if version >= 703
+  set colorcolumn=80    " highlight the 80th column
+  set listchars=nbsp:¶,eol:¬,tab:>-,extends:»,precedes:«,trail:• " characters to use for 'specical' characters and non-printables
+endif
+
+" map <space> to disable highlight easily
+nnoremap <silent><leader><space> :noh<cr>
+
+" unmap F1 - stupid help key
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+" map to remove trailing whitespace from lines
+nnoremap <silent><leader>l :%s/\v\s+$//g<cr>
+nnoremap <silent><Leader>i :set invlist<CR>
+
+" reformats entire file based on current indent/syntax settings,
+" then resets cursor to last position
+noremap <silent><leader>k gg=G``
+
+" Paste mode
+nnoremap <C-E>  :silent! set invpaste<CR>
+set pastetoggle=<C-E>
+
+" Appends / insert current date
+nmap <Leader>_d "=strftime("%Y-%m-%d")<CR>p
+nmap <Leader>_D "=strftime("%Y%m%d")<CR>P
+
+set laststatus =2
+set statusline =%t\ [%Y]\ [%l,%v][%p%%]
+set statusline+=\ %{fugitive#statusline()}
+
+" Syntastic stuff
+set statusline+=\ %#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_auto_jump=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=1
+" map for syntastic errors window
+nnoremap <LEADER>e :Errors<CR>
+" passive default but active on ruby and puppet
+" the perl one is there only to complete the example.
+let g:syntastic_mode_map = { 'mode': 'passive',
+  \ 'active_filetypes': ['ruby'],
+  \ 'passive_filetypes': ['perl', 'puppet'] }
+
+" ctags
+set tags=./tags;   " allows recursing upwards to project roots
+
+" enable matchit which ships with vim but isn't turned on
+source $VIMRUNTIME/macros/matchit.vim
+
+" lazy git stuff
+nmap <LEADER>g :Gstatus<CR>
+nmap <LEADER>G :Gcommit<CR>
+
+" enable puppet module detection
+let g:puppet_module_detect=1
