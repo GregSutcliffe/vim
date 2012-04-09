@@ -1,7 +1,6 @@
 " Variables for template interpolation
-let email_address = "gsutcliffe@ibahn.com"
+let email_address = "greg.sutcliffe@gmail.com"
 let fullname = "Greg Sutcliffe"
-let company_name = "iBahn"
 let template_date_format_string = "%a %b %d %Y"
 
 " pathogen is a plugin for managing plugins as bundles
@@ -84,8 +83,8 @@ nnoremap <LEADER>e :Errors<CR>
 " passive default but active on ruby and puppet
 " the perl one is there only to complete the example.
 let g:syntastic_mode_map = { 'mode': 'passive',
-  \ 'active_filetypes': ['ruby'],
-  \ 'passive_filetypes': ['perl', 'puppet'] }
+  \ 'active_filetypes': ['ruby','puppet'],
+  \ 'passive_filetypes': ['perl'] }
 
 " ctags
 set tags=./tags;   " allows recursing upwards to project roots
