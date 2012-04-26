@@ -72,6 +72,7 @@ set statusline =%t\ [%Y]\ [%l,%v][%p%%]
 set statusline+=\ %{fugitive#statusline()}
 
 " Syntastic stuff
+syntax on
 set statusline+=\ %#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -99,3 +100,7 @@ nmap <LEADER><C-g> :Git push<CR>
 
 " enable puppet module detection
 let g:puppet_module_detect=1
+
+" Gist settings
+let g:gist_open_browser_after_post = 1
+let g:gist_browser_command = 'chromium %URL% &'
