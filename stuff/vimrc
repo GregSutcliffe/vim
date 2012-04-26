@@ -83,8 +83,8 @@ nnoremap <LEADER>e :Errors<CR>
 " passive default but active on ruby and puppet
 " the perl one is there only to complete the example.
 let g:syntastic_mode_map = { 'mode': 'passive',
-  \ 'active_filetypes': ['ruby','puppet'],
-  \ 'passive_filetypes': ['perl'] }
+  \ 'active_filetypes': ['ruby'],
+  \ 'passive_filetypes': ['perl','puppet'] }
 
 " ctags
 set tags=./tags;   " allows recursing upwards to project roots
@@ -95,6 +95,7 @@ source $VIMRUNTIME/macros/matchit.vim
 " lazy git stuff
 nmap <LEADER>g :Gstatus<CR>
 nmap <LEADER>G :Gcommit<CR>
+nmap <LEADER><C-g> :Git push<CR>
 
 " enable puppet module detection
 let g:puppet_module_detect=1
