@@ -84,8 +84,8 @@ nnoremap <LEADER>e :Errors<CR>
 " passive default but active on ruby and puppet
 " the perl one is there only to complete the example.
 let g:syntastic_mode_map = { 'mode': 'passive',
-  \ 'active_filetypes': ['ruby'],
-  \ 'passive_filetypes': ['perl','puppet'] }
+  \ 'active_filetypes': [],
+  \ 'passive_filetypes': ['ruby','perl','puppet'] }
 
 " ctags
 set tags=./tags;   " allows recursing upwards to project roots
