@@ -19,3 +19,27 @@
 [submodule "bundle/vim-gnupg"]
 	path = bundle/vim-gnupg
 	url = git://gitorious.org/vim-gnupg/vim-gnupg.git
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim
+[submodule "bundle/yankring"]
+	path = bundle/yankring
+	url = https://github.com/vim-scripts/YankRing.vim
+[submodule "bundle/vim-surround"]
+	path = bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/vim-repeat"]
+	path = bundle/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
+[submodule "bundle/vim-slime"]
+	path = bundle/vim-slime
+	url = https://github.com/jpalardy/vim-slime.git
+[submodule "bundle/vim-scratch"]
+	path = bundle/vim-scratch
+	url = https://github.com/duff/vim-scratch.git

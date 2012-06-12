@@ -7,43 +7,77 @@ let template_date_format_string = "%a %b %d %Y"
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+filetype plugin indent on
 
-filetype on
-filetype indent on
-filetype plugin on
+" Load NERDTree if we specify no files
+" autocmd vimenter * if !argc() | NERDTree | endif
 
-" set options here
-set ai           " auto indend
-set si           " smart indent
-set ff=unix      " file format unix dammit
-set nocompatible " nocompatible mode
-set ruler        " ruler the bottom
-set background=dark
+" =======
+" Options
+" =======
+set autoindent                                                  " indent
+set autoread                                                    " auto read in files that have changed underneath
+set background=dark                                             " dark terminal
+set backspace=indent,eol,start                                  " what does this do?
+set colorcolumn=85                                              " highlight the 85th column
+set cursorline                                                  " underline current line
+set encoding=utf-8                                              " sane encoding
+set expandtab                                                   " expand tabs to spaces
+set fileformat=unix                                             " file format unix dammit
+set gdefault                                                    " Replace all occurances with s/a/b/
+set hidden                                                      " handle buffers properly
+set hlsearch                                                    " highlight search on by default
+set ignorecase                                                  " ignore case searching
+set incsearch                                                   " better searching
+set listchars=nbsp:¶,eol:¬,tab:▸\ ,extends:»,precedes:«,trail:• " characters to use for 'specical' characters and non-printables
+set matchtime=5                                                 " how many tenths of a second to blink matching brackets for
+set modeline                                                    " enable modelines
+set modelines=1                                                 " number of modelines to read
+set nocompatible                                                " nocompatible mode - who cares about vi?
+set noincsearch                                                 " move curser as you type search terms
+set relativenumber                                              " absolute lines numbers are in the statusbar anyway
+set ruler                                                       " ruler the bottom
+set scrolloff=3                                                 " keep a few lines around the cursor
+set shellcmdflag=-lc                                            " set the ! shell to be a login shell to get at functions and aliases
+set shiftwidth=2                                                " # of spaces for auto indent
+set showmatch                                                   " show matching brackets
+set showmode                                                    " Display current mode
+set smartcase                                                   " case sensitive search when search term has case in it
+set smartindent                                                 " smart indent
+set smarttab                                                    " smart tab (shiftwidth v tabstop)
+set softtabstop=2                                               " soft tabstop
+set tabstop=2                                                   " define what our tabs are
+set textwidth=0                                                 " no textwidth set by default
+set tildeop                                                     " case change with movement rather than single char
+set ttyfast                                                     " better paste support
+set visualbell                                                  " Better notification
+set wildmenu                                                    " Menu support
+set wildmode=list:longest                                       " Don't steal my focus, menus!
 
-set expandtab     " expand tabs to spaces
-set tabstop=2     " define what our tabs are
-set softtabstop=2 " soft tabstop
-set shiftwidth=2  " # of spaces for auto indent
-set smarttab      " smart tab (shiftwidth v tabstop)
-set tw=0          " no textwidth set by default
-set modeline      " enable modelines
-set modelines=1   " number of modelines to read
-set tildeop       " case change with movement rather than single char
+" ======
+" Remaps
+" ======
 
-set showmatch       " show matching brackets
-set matchtime=5     " how many tenths of a second to blink matching brackets for
+" use ; like :
+nnoremap ; :
 
-set hlsearch      " highlight search on by default
-set noincsearch   " move curser as you type search terms
-set autoread      " auto read in files that have changed underneath
-set shellcmdflag=-lc  " set the ! shell to be a login shell to get at functions and aliases
+" jj to quit insert mode
+inoremap jj <ESC>
 
-if version >= 703
-  set colorcolumn=80    " highlight the 80th column
-  set listchars=nbsp:¶,eol:¬,tab:>-,extends:»,precedes:«,trail:• " characters to use for 'specical' characters and non-printables
-endif
+" Split window handling
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-up>    <C-w><up>
+nnoremap <C-down>  <C-w><down>
+nnoremap <C-left>  <C-w><left>
+nnoremap <C-right> <C-w><right>
+nnoremap <S-C-left>  <C-w><
+nnoremap <S-C-right> <C-w>>
 
-" map <space> to disable highlight easily
+" Tab for moving around markers
+nnoremap <tab> %
+vnoremap <tab> %
+
+" map <leader><space> to disable highlight easily
 nnoremap <silent><leader><space> :noh<cr>
 
 " unmap F1 - stupid help key
@@ -51,8 +85,15 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" map to remove trailing whitespace from lines
-nnoremap <silent><leader>l :%s/\v\s+$//g<cr>
+" quick edit of .vimrc
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+" map <leader>l to remove trailing whitespace from file
+highlight RedundantWhitespace ctermbg=red
+match RedundantWhitespace /\s\+$\| \+\ze\t/
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" map <leader>i to show invisible chars
 nnoremap <silent><Leader>i :set invlist<CR>
 
 " reformats entire file based on current indent/syntax settings,
@@ -67,11 +108,18 @@ set pastetoggle=<C-E>
 nmap <Leader>_d "=strftime("%Y-%m-%d")<CR>p
 nmap <Leader>_D "=strftime("%Y%m%d")<CR>P
 
+" Status line
 set laststatus =2
 set statusline =%t\ [%Y]\ [%l,%v][%p%%]
 set statusline+=\ %{fugitive#statusline()}
 
-" Syntastic stuff
+" save on lost-focus - doesn't work in vim, only gvim
+au FocusLost * :wa
+
+" Plugin config
+" =============
+
+" Syntastic stuff - doesn't seem to work well on Archlinux
 syntax on
 set statusline+=\ %#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -81,26 +129,42 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_auto_loc_list=1
 " map for syntastic errors window
 nnoremap <LEADER>e :Errors<CR>
-" passive default but active on ruby and puppet
+" passive default but ruby / puppet aren't working well on Archlinux just now
 " the perl one is there only to complete the example.
 let g:syntastic_mode_map = { 'mode': 'passive',
-  \ 'active_filetypes': [],
-  \ 'passive_filetypes': ['ruby','perl','puppet'] }
-
-" ctags
-set tags=./tags;   " allows recursing upwards to project roots
-
-" enable matchit which ships with vim but isn't turned on
-source $VIMRUNTIME/macros/matchit.vim
-
-" lazy git stuff
-nmap <LEADER>g :Gstatus<CR>
-nmap <LEADER>G :Gcommit<CR>
-nmap <LEADER><C-g> :Git push<CR>
+      \ 'active_filetypes': [],
+      \ 'passive_filetypes': ['ruby','perl','puppet'] }
 
 " enable puppet module detection
 let g:puppet_module_detect=1
 
-" Gist settings
+" Ctags
+" incomplete, nonfunctional yet
+set tags=./tags;   " allows recursing upwards to project roots
+
+" Gist
 let g:gist_open_browser_after_post = 1
 let g:gist_browser_command = 'chromium %URL% &'
+
+" Fugitive
+nmap <LEADER>g :Gstatus<CR>
+nmap <LEADER>G :Gcommit<CR>
+nmap <LEADER><C-g> :Git push<CR>
+
+" NERDtree
+nnoremap <leader>nt :NERDTree<space>
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeChDirMode = 1
+let g:NERDTreeWinPos = "right"
+
+" Snipmate
+let g:snippets_dir = "~/.vim/snippets" " Overrides the default puppet snippets
+
+" YankRing
+nnoremap <silent><F11> :YRShow<CR>
+
+" Scratch
+nnoremap <leader><tab> :vsplit Sscratch<cr>
+
+" Matchit - ships with vim but isn't turned on
+source $VIMRUNTIME/macros/matchit.vim
