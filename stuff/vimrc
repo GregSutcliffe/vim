@@ -12,6 +12,8 @@ filetype plugin indent on
 " Load NERDTree if we specify no files
 " autocmd vimenter * if !argc() | NERDTree | endif
 
+let mapleader = ","
+
 " =======
 " Options
 " =======
@@ -19,7 +21,6 @@ set autoindent                                                  " indent
 set autoread                                                    " auto read in files that have changed underneath
 set background=dark                                             " dark terminal
 set backspace=indent,eol,start                                  " what does this do?
-set colorcolumn=85                                              " highlight the 85th column
 set cursorline                                                  " underline current line
 set encoding=utf-8                                              " sane encoding
 set expandtab                                                   " expand tabs to spaces
@@ -35,7 +36,6 @@ set modeline                                                    " enable modelin
 set modelines=1                                                 " number of modelines to read
 set nocompatible                                                " nocompatible mode - who cares about vi?
 set noincsearch                                                 " move curser as you type search terms
-set relativenumber                                              " absolute lines numbers are in the statusbar anyway
 set ruler                                                       " ruler the bottom
 set scrolloff=3                                                 " keep a few lines around the cursor
 set shellcmdflag=-lc                                            " set the ! shell to be a login shell to get at functions and aliases
@@ -53,6 +53,12 @@ set ttyfast                                                     " better paste s
 set visualbell                                                  " Better notification
 set wildmenu                                                    " Menu support
 set wildmode=list:longest                                       " Don't steal my focus, menus!
+
+" These need a newer version Vim than is in Debian Squeeze
+if version >= 703
+  set colorcolumn=85 " highlight the 85th column
+  set relativenumber " absolute lines numbers are in the statusbar anyway
+endif
 
 " ======
 " Remaps
