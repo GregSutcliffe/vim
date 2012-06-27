@@ -86,6 +86,9 @@ vnoremap <tab> %
 " map <leader><space> to disable highlight easily
 nnoremap <silent><leader><space> :noh<cr>
 
+" map :W to 'sudo save file'
+command W w !sudo tee % >/dev/null
+
 " unmap F1 - stupid help key
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
