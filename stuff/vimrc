@@ -38,7 +38,6 @@ set nocompatible                                                " nocompatible m
 set noincsearch                                                 " move curser as you type search terms
 set ruler                                                       " ruler the bottom
 set scrolloff=3                                                 " keep a few lines around the cursor
-set shellcmdflag=-lc                                            " set the ! shell to be a login shell to get at functions and aliases
 set shiftwidth=2                                                " # of spaces for auto indent
 set showmatch                                                   " show matching brackets
 set showmode                                                    " Display current mode
@@ -134,15 +133,20 @@ set statusline+=\ %#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_auto_jump=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=2
+let g:syntastic_loc_list_height=5
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol='S✗'
+let g:syntastic_style_warning_symbol='S⚠'
 " map for syntastic errors window
 nnoremap <LEADER>e :Errors<CR>
+nnoremap <LEADER>C :SyntasticCheck<CR>
 " passive default but ruby / puppet aren't working well on Archlinux just now
 " the perl one is there only to complete the example.
 let g:syntastic_mode_map = { 'mode': 'passive',
-      \ 'active_filetypes': [],
-      \ 'passive_filetypes': ['ruby','perl','puppet'] }
+      \ 'active_filetypes': ['puppet'],
+      \ 'passive_filetypes': ['ruby','perl'] }
 
 " enable puppet module detection
 let g:puppet_module_detect=1
