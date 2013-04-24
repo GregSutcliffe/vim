@@ -5,14 +5,15 @@ let template_date_format_string = "%a %b %d %Y"
 
 " pathogen is a plugin for managing plugins as bundles
 filetype off
-call pathogen#runtime_append_all_bundles()
+runtime bundle/pathogen/autoload/pathogen.vim
+call pathogen#infect()
 call pathogen#helptags()
 filetype plugin indent on
 
 " Load NERDTree if we specify no files
 " autocmd vimenter * if !argc() | NERDTree | endif
 
-let mapleader = ","
+let mapleader = '\'
 
 " =======
 " Options
@@ -63,9 +64,6 @@ endif
 " Remaps
 " ======
 
-" use ; like :
-nnoremap ; :
-
 " jj to quit insert mode
 inoremap jj <ESC>
 
@@ -96,7 +94,7 @@ vnoremap <F1> <ESC>
 " quick edit of .vimrc
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
-" map <leader>l to remove trailing whitespace from file
+" map <leader>W to remove trailing whitespace from file
 highlight RedundantWhitespace ctermbg=red
 match RedundantWhitespace /\s\+$\| \+\ze\t/
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
