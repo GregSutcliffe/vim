@@ -177,5 +177,9 @@ nnoremap <silent><F11> :YRShow<CR>
 " Scratch
 nnoremap <leader><tab> :vsplit Sscratch<cr>
 
+" Use ACK
+set grepprg=ack\ --no-group\ --column\ $*
+set grepformat=%f:%l:%c:%m
+
 " Matchit - ships with vim but isn't turned on
 source $VIMRUNTIME/macros/matchit.vim
