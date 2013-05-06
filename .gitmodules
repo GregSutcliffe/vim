@@ -46,12 +46,12 @@
 [submodule "bundle/vim-rails"]
 	path = bundle/vim-rails
 	url = git://github.com/tpope/vim-rails.git
-[submodule "bundle/AutoComplPop"]
-	path = bundle/AutoComplPop
-	url = https://github.com/vim-scripts/AutoComplPop
 [submodule "bundle/pathogen"]
 	path = bundle/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule "bundle/vim-abolish"]
 	path = bundle/vim-abolish
 	url = https://github.com/tpope/vim-abolish
+[submodule "bundle/vim-dbext"]
+	path = bundle/vim-dbext
+	url = https://github.com/vim-scripts/dbext.vim.git
