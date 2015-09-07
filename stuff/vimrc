@@ -15,6 +15,9 @@ filetype plugin indent on
 
 let mapleader = '\'
 
+" Use standard register to interact with X11 register
+set clipboard=unnamed
+
 " =======
 " Options
 " =======
@@ -102,6 +105,9 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " map <leader>i to show invisible chars
 nnoremap <silent><Leader>i :set invlist<CR>
 
+" map <leader>p to insert pry debugger in Ruby
+nnoremap <leader>p orequire 'pry' ; binding.pry<esc>
+
 " reformats entire file based on current indent/syntax settings,
 " then resets cursor to last position
 noremap <silent><leader>k gg=G``
@@ -144,7 +150,7 @@ nnoremap <LEADER>C :SyntasticCheck<CR>
 " the perl one is there only to complete the example.
 let g:syntastic_mode_map = { 'mode': 'passive',
       \ 'active_filetypes': ['puppet'],
-      \ 'passive_filetypes': ['ruby','perl'] }
+      \ 'passive_filetypes': ['ruby','perl','puppet'] }
 
 " enable puppet module detection
 let g:puppet_module_detect=1
